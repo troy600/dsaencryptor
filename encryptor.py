@@ -51,9 +51,12 @@ with open(f"{home}/.config/keyfile.key", "rb") as thekey:
 fernet = Fernet(key=this)
 class files_encrypt:
     def __init__(self, encrypt):
-#        if os.path.exists(f"encrypt") == False:
-#            print(f"{color.RED} file didn't exists. exiting safely")
-#            exit
+        files = ''
+        for lists in os.listdir('./'):
+            if lists == encrypt:
+                print(f"{color.BLUE} foreignt file found!! \n" )
+                continue
+
         with open(encrypt, "rb") as toread:
             dsafun = toread.read()
             cs = fernet.encrypt(dsafun)
