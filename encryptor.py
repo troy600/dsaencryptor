@@ -51,11 +51,11 @@ with open(f"{home}/.config/keyfile.key", "rb") as thekey:
 fernet = Fernet(key=this)
 class files_encrypt:
     def __init__(self, encrypt):
-        files = ''
-        for lists in os.listdir('./'):
-            if lists == encrypt:
+        if encrypt in os.listdir():
                 print(f"{color.BLUE} foreignt file found!! \n" )
-                continue
+        else:
+            print(f"{color.RED} invalid filename or no file found. \n exiting")
+            exit()
 
         with open(encrypt, "rb") as toread:
             dsafun = toread.read()
@@ -70,6 +70,15 @@ class files_encrypt:
 
 class file_decrypt:
     def __init__(self, decrypt):
+        if decrypt in os.listdir():
+            if ".wncry" in decrypt:
+                print(f"{color.CYAN} encrypted file founf. decrypting now")
+            else:
+                print("file is not encrypted. \n exiting")
+                exit()
+        else:
+            print(f"{color.RED} Invalid file! \n exiting")
+            exit()
         with open(decrypt, "rb") as toread:
             print(f"{color.CYAN}reading the file...")
             dsa = toread.read()
