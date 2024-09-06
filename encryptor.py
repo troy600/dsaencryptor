@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-#from and for BSDSA Students ;)
+#from and for BSDSA Students
 
 from cryptography.fernet import Fernet
 import os
