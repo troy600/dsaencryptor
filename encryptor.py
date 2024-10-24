@@ -13,6 +13,7 @@ parser = argparse.ArgumentParser(description="simple ass encryption tool\n This 
 parser.add_argument("--encrypt", type=str, help="filename to encrypt")
 parser.add_argument("--decrypt", type=str, help="decryption method")
 parser.add_argument("--keygen", action="store_true", help="generate a ney key store it on ~/.config/keyfile")
+parser.add_argument("--key", type=str, help="Specify the key you want to use")
 
 args = parser.parse_args()
 
@@ -38,7 +39,7 @@ if args.keygen == True:
             print("bye")
             exit
         else:
-            print("invalid mh")
+            print("invalid Idiot")
             exit
 
     print(f"{color.BLUE} creating the key!! \n sucessful")
@@ -46,9 +47,23 @@ if args.keygen == True:
         keyfile.write(Fernet.generate_key())
     exit
 
+'''
+def makekey(KeyDir):
+    with open(f"{KeyDir}", "rb") as thekey:
+        this = thekey.read()
+        fernet = Fernet(key=this)
+        return fernet
+
+
+if args.key != None:
+    this = makekey(KeyDir=args.key)
+fernet = Fernet(this)
+'''
+
 with open(f"{home}/.config/keyfile.key", "rb") as thekey:
     this = thekey.read()
-fernet = Fernet(key=this)
+    fernet = Fernet(key=this)
+
 class files_encrypt:
     def __init__(self, encrypt):
         if encrypt in os.listdir():
@@ -98,6 +113,8 @@ def deletext(filenames):
         filename = name
         name, extension = os.path.splitext(filename)
         return filename
+    
+
 if args.decrypt != None:
     file_decrypt(f"{args.decrypt}")
     exit
@@ -106,4 +123,3 @@ if args.encrypt != None:
     files_encrypt(f"{args.encrypt}")
     exit
 true = True
-#os.system(f"{__file__} --help")
